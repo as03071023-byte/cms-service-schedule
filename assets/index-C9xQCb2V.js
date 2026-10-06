@@ -38,9 +38,8 @@ function cmsRules(services){
 function cmsFinance({services}){
  const warnings=cmsRules(services),unknown=[...new Set(services.filter(s=>cmsPrice(s.code)===null).map(s=>s.code))];
  const cell=(tag,text,extra={})=>(0,o.jsx)(tag,{...extra,children:text});
- const quantity=items=>items.reduce((sum,s)=>sum+s.qty,0);
  const totals=items=>(0,o.jsxs)("div",{style:{display:"flex",flexWrap:"wrap",gap:"12px 28px",alignItems:"baseline",marginTop:6},children:[
-  (0,o.jsxs)("div",{children:[cell("span","總支數 ",{style:{fontSize:13}}),cell("strong",cmsMoney(quantity(items)),{style:{fontSize:26,color:"#0c568f"}})," 支"]}),
+  
   (0,o.jsxs)("div",{children:[cell("span","總金額 ",{style:{fontSize:13}}),cell("strong",cmsMoney(cmsAmount(items)),{style:{fontSize:26,color:"#0c568f"}})," 元"]})]});
  const table=rows=>(0,o.jsxs)("table",{style:{width:"100%",fontSize:12,marginTop:8},children:[
   (0,o.jsx)("thead",{children:(0,o.jsxs)("tr",{children:["碼別","支數","單價","金額"].map((t,k)=>cell("th",t,{key:k,style:{textAlign:k?"right":"left",padding:"5px 6px",whiteSpace:"nowrap"}}))})}),
